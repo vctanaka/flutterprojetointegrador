@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:skin_saga/pages/coupon.dart';
+import 'package:skin_saga/pages/home.dart';
+import 'package:skin_saga/pages/mission.dart';
+import 'package:skin_saga/pages/pointshistory.dart';
+import 'package:skin_saga/pages/register.dart';
 import 'package:skin_saga/pages/splash.dart';
 // import 'package:skin_saga/pages/register.dart';
 // import 'package:skin_saga/pages/splash.dart';
@@ -21,7 +26,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
-      home: Splash(),
+      home: Coupon(),
+      // home: Splash(),
     );
   }
 }

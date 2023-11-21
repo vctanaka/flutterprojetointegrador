@@ -1,15 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:skin_saga/controllers/ApiClient.dart';
+import 'package:skin_saga/controllers/Tools.dart';
 import 'package:skin_saga/pages/home.dart';
 import 'package:skin_saga/pages/quiz_start.dart';
 
-class QuizEnd extends StatelessWidget {
+class QuizEnd extends StatefulWidget {
   final String skinType;
+  const QuizEnd({super.key, required this.skinType});
 
-  QuizEnd({required this.skinType});
+  @override
+  State<QuizEnd> createState() => _QuizEndState();
+}
+
+class _QuizEndState extends State<QuizEnd> {
+  void setSkinType(String skinT) async {
+    try {
+      print(skinT);
+      Tools().getLoginId().then((value) {
+        print(value);
+        var apiClient = ApiClient();
+        apiClient.fetchAuth(
+            'upSkinType', {'skin_type': skinT, 'id': value.toString()});
+      });
+
+      await Tools().refreshLogin();
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
+        (route) => false,
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
 
   Widget _displaytype(context) {
     Widget displayReturn;
-    var testValue = skinType;
+    var testValue = widget.skinType;
 
     switch (testValue) {
       case 'normal':
@@ -92,10 +120,7 @@ class QuizEnd extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Home()),
-                );
+                setSkinType(widget.skinType);
               },
               child: RichText(
                 textAlign: TextAlign.center,
@@ -122,7 +147,7 @@ class QuizEnd extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => QuizStart()),
                 );

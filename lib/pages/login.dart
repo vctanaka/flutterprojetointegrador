@@ -19,9 +19,10 @@ class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  void setToken(String token) async {
+  void setTokenLogin(String token, String jsonLogin) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('authToken', token);
+    prefs.setString('jsonLogin', jsonLogin);
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => Home()));
   }
@@ -82,8 +83,7 @@ class _LoginState extends State<Login> {
                           if (value.statusCode == 200) {
                             Map<String, dynamic> jsonArray =
                                 json.decode(value.body);
-                            print('deu certo');
-                            setToken(jsonArray['token']);
+                            setTokenLogin(jsonArray['token'], value.body);
                           } else {
                             print('erro');
                           }

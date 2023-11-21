@@ -1,8 +1,32 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skin_saga/components/component_input.dart';
+import 'package:skin_saga/controllers/ApiClient.dart';
+import 'package:skin_saga/pages/home.dart';
 import 'package:skin_saga/pages/login.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
+  const Register({super.key});
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  void setTokenLogin(String token, String jsonLogin) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('authToken', token);
+    prefs.setString('jsonLogin', jsonLogin);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => Home()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,18 +49,32 @@ class Register extends StatelessWidget {
                 child: ListView(
                   padding: EdgeInsets.all(25),
                   children: [
-                    // ComponentInput(labelText: 'Email'),
-
-                    // ComponentInput(labelText: 'Nome'),
-
-                    // ComponentInput(labelText: 'Senha'),
-
-                    // ComponentInput(labelText: 'Confirmar Senha'),
+                    ComponentInput(
+                        labelText: 'Email', controller: emailController),
+                    ComponentInput(
+                        labelText: 'Nome', controller: nameController),
+                    ComponentInput(
+                        labelText: 'Senha', controller: passwordController),
+                    ComponentInput(
+                        labelText: 'Confirmar Senha',
+                        controller: passwordController),
                     SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Login()));
+                        var apiClient = ApiClient();
+                        apiClient.fetch('register', {
+                          'email': emailController.text,
+                          'password': passwordController.text,
+                          'name': nameController.text
+                        }).then((value) {
+                          if (value.statusCode == 200) {
+                            Map<String, dynamic> jsonArray =
+                                json.decode(value.body);
+                            setTokenLogin(jsonArray['token'], value.body);
+                          } else {
+                            print('erro');
+                          }
+                        });
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromRGBO(219, 88, 143, 1),

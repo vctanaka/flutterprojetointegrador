@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:skin_saga/controllers/Tools.dart';
+import 'package:skin_saga/pages/coupon.dart';
 import 'package:skin_saga/pages/login.dart';
+import 'package:skin_saga/pages/pointshistory.dart';
 import 'package:skin_saga/pages/quiz_start.dart';
 
 class Profile extends StatefulWidget {
@@ -11,6 +16,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  String loginName = '';
+
   void removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('authToken');
@@ -18,6 +25,15 @@ class _ProfileState extends State<Profile> {
       context,
       MaterialPageRoute(builder: (context) => Login()),
     );
+  }
+
+  Future<String> getLoginName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? jsonLogin = prefs.getString('jsonLogin');
+    Map<String, dynamic> jsonLoginDecode = json.decode(jsonLogin ?? '');
+
+    loginName = jsonLoginDecode['login']['name'];
+    return jsonLoginDecode['login']['name'];
   }
 
   @override
@@ -45,9 +61,12 @@ class _ProfileState extends State<Profile> {
                 color: Color.fromRGBO(249, 214, 230, 1),
               ),
               SizedBox(height: 16),
-              Text(
-                'Kristielle Dias',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Tools().waitBuilder(
+                getLoginName(),
+                (value) => Text(
+                  value,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
               ),
               SizedBox(height: 80),
               Padding(
@@ -133,7 +152,14 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PointsHistory(),
+                              ),
+                            );
+                          },
                           child: const Text(
                             'Historico de Pontos',
                             style: TextStyle(fontSize: 18, color: Colors.black),
@@ -153,7 +179,14 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Coupon(),
+                              ),
+                            );
+                          },
                           child: const Text(
                             'Cupons de Desconto',
                             style: TextStyle(fontSize: 18, color: Colors.black),
