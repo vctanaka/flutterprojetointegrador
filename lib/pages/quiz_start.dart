@@ -89,7 +89,7 @@ class QuizStart extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => QuizEnd(skinType: 'seca')),
+                        builder: (context) => QuizEnd(skinType: 'Seca')),
                   );
                 },
                 child: RichText(
@@ -138,7 +138,7 @@ class QuizStart extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => QuizEnd(skinType: 'oleosa')),
+                        builder: (context) => QuizEnd(skinType: 'Oleosa')),
                   );
                 },
                 child: RichText(
@@ -203,7 +203,7 @@ class QuizStart extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => QuizEnd(skinType: 'mista')),
+                        builder: (context) => QuizEnd(skinType: 'Mista')),
                   );
                 },
                 child: RichText(
@@ -260,7 +260,7 @@ class QuizStart extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => QuizEnd(skinType: 'normal')),
+                        builder: (context) => QuizEnd(skinType: 'Normal')),
                   );
                 },
                 child: RichText(

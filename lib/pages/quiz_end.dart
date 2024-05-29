@@ -40,7 +40,7 @@ class _QuizEndState extends State<QuizEnd> {
     var testValue = widget.skinType;
 
     switch (testValue) {
-      case 'normal':
+      case 'Normal':
         displayReturn = Text(
           'Normal',
           style: TextStyle(
@@ -50,7 +50,7 @@ class _QuizEndState extends State<QuizEnd> {
           ),
         );
         break;
-      case 'oleosa':
+      case 'Oleosa':
         displayReturn = Text(
           'Oleosa',
           style: TextStyle(
@@ -60,7 +60,7 @@ class _QuizEndState extends State<QuizEnd> {
           ),
         );
         break;
-      case 'seca':
+      case 'Seca':
         displayReturn = Text(
           'Seca',
           style: TextStyle(
@@ -70,7 +70,7 @@ class _QuizEndState extends State<QuizEnd> {
           ),
         );
         break;
-      case 'mista':
+      case 'Mista':
         displayReturn = Text(
           'Mista',
           style: TextStyle(

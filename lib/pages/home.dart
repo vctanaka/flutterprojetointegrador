@@ -88,7 +88,7 @@ class _HomeState extends State<Home> {
     return Center(
       child: Container(
         width: 300,
-        height: 500,
+        height: 550,
         decoration: BoxDecoration(
           color: Color.fromRGBO(255, 245, 250, 1),
           borderRadius: BorderRadius.circular(20),
@@ -97,7 +97,62 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 35, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                child: Text(
+                  'Tipo de Pele',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: Color.fromRGBO(174, 70, 120, 1),
+                  ),
+                ),
+              ),
+              SizedBox(height: 15),
+              Tools().waitBuilder(
+                getSkinType(),
+                (value) => ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    value.toString(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                  ), //TODO: pegar valor de pontos
+
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(219, 88, 143, 1),
+                    minimumSize: Size(160, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 15),
+
+              Center(
+                child: SizedBox(
+                  width: 230.0,
+                  height: 230.0,
+                  child: Image.asset('lib/img/body.png', fit: BoxFit.fitWidth),
+                ),
+              ),
+              // Container(
+              //     margin: const EdgeInsets.fromLTRB(60, 0, 60, 0),
+              //     child: ClipRRect(
+              //         borderRadius: BorderRadius.all(Radius.circular(10)),
+              //         child: LinearProgressIndicator(
+              //           minHeight: 7,
+              //           value: 0.1, //TODO: pegar valor de progresso
+              //           backgroundColor: Color.fromRGBO(224, 130, 130, 0.3),
+              //           valueColor: AlwaysStoppedAnimation<Color>(
+              //               Color.fromRGBO(174, 70, 120, 1)),
+              //         ))),
+
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                 child: Text(
                   'Pontos Acumulados',
                   style: TextStyle(
@@ -129,7 +184,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 5),
               TextButton(
                 onPressed: () {},
                 child: Padding(
@@ -142,47 +197,28 @@ class _HomeState extends State<Home> {
                       textAlign: TextAlign.center),
                 ),
               ),
-              Center(
-                child: SizedBox(
-                  width: 230.0,
-                  height: 230.0,
-                  child: Image.asset('lib/img/body.png', fit: BoxFit.fitWidth),
-                ),
-              ),
-              Container(
-                  margin: const EdgeInsets.fromLTRB(60, 0, 60, 0),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      child: LinearProgressIndicator(
-                        minHeight: 7,
-                        value: 0.1, //TODO: pegar valor de progresso
-                        backgroundColor: Color.fromRGBO(224, 130, 130, 0.3),
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            Color.fromRGBO(174, 70, 120, 1)),
-                      ))),
-              SizedBox(height: 5),
-              Container(
-                child: Expanded(
-                  child: Text(
-                    '1/20 Desafios Cumpridos',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: 'Rambla',
-                      color: Color.fromRGBO(174, 70, 120, 1),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                child: Expanded(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.military_tech),
-                    iconSize: 30,
-                    color: Color.fromRGBO(174, 70, 120, 1),
-                  ),
-                ),
-              ),
+              // Container(
+              //   child: Expanded(
+              //     child: Text(
+              //       '1/20 Desafios Cumpridos',
+              //       style: TextStyle(
+              //         fontSize: 13,
+              //         fontFamily: 'Rambla',
+              //         color: Color.fromRGBO(174, 70, 120, 1),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Container(
+              //   child: Expanded(
+              //     child: IconButton(
+              //       onPressed: () {},
+              //       icon: Icon(Icons.military_tech),
+              //       iconSize: 30,
+              //       color: Color.fromRGBO(174, 70, 120, 1),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -207,6 +243,16 @@ class _HomeState extends State<Home> {
         return Container();
       });
     });
+  }
+
+  Future<String> getSkinType() async {
+    ApiClient apiClient = ApiClient();
+    var id = await Tools().getLoginId();
+    var response = await apiClient.fetchAuth('getSkinType', {
+      'id': id.toString(),
+    });
+    var respDecode = json.decode(response.body);
+    return respDecode['skin_type'];
   }
 
   Future<String> getLoginName() async {
@@ -278,108 +324,6 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-            height: 40,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                ElevatedButton(
-                  child: Text('Pele Comum',
-                      style:
-                          TextStyle(color: Color.fromRGBO(239, 108, 163, 1))),
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    side: const BorderSide(
-                      width: 0.8,
-                      color: Color.fromRGBO(239, 108, 163, 1),
-                    ),
-                    elevation: 0.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: ElevatedButton(
-                    child: Text('Combinacao',
-                        style:
-                            TextStyle(color: Color.fromRGBO(239, 108, 163, 1))),
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      side: const BorderSide(
-                        width: 0.8,
-                        color: Color.fromRGBO(239, 108, 163, 1),
-                      ),
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: ElevatedButton(
-                    child: Text('Pele Oleosa',
-                        style:
-                            TextStyle(color: Color.fromRGBO(239, 108, 163, 1))),
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      side: const BorderSide(
-                        width: 0.8,
-                        color: Color.fromRGBO(239, 108, 163, 1),
-                      ),
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: ElevatedButton(
-                    child: Text('Pele Madura',
-                        style:
-                            TextStyle(color: Color.fromRGBO(239, 108, 163, 1))),
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      side: const BorderSide(
-                        width: 0.8,
-                        color: Color.fromRGBO(239, 108, 163, 1),
-                      ),
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  child: ElevatedButton(
-                    child: Text('Pele Seca',
-                        style:
-                            TextStyle(color: Color.fromRGBO(239, 108, 163, 1))),
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      side: const BorderSide(
-                        width: 0.8,
-                        color: Color.fromRGBO(239, 108, 163, 1),
-                      ),
-                      elevation: 0.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 35),
           FutureBuilder(
             future: testDone(),
             builder: (context, snapshot) {

@@ -66,7 +66,7 @@ class ComponentMission extends StatelessWidget {
                         IconButton(
                           onPressed: () {},
                           icon: Icon(Icons.favorite,
-                              color: Color.fromRGBO(53, 15, 31, 1)),
+                              color: Color.fromRGBO(219, 88, 143, 1)),
                         )
                       else
                         IconButton(

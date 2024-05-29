@@ -188,7 +188,7 @@ class _CouponState extends State<Coupon> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
                       child: Text(
-                        'Cupom de Desconto',
+                        'Total de Pontos',
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
@@ -214,7 +214,7 @@ class _CouponState extends State<Coupon> {
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
-                              color: Color.fromRGBO(252, 62, 62, 1),
+                              color: Color.fromRGBO(219, 88, 143, 1),
                             ),
                           ), //TODO
                         ),
@@ -263,24 +263,27 @@ class _CouponState extends State<Coupon> {
                                         color: Color.fromRGBO(248, 248, 248, 1),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
-                                      child: RichText(
-                                        textAlign: TextAlign.start,
-                                        text: TextSpan(
-                                          text: element['coupon_id'] != null
-                                              ? element['code']
-                                              : '****',
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                            color:
-                                                Color.fromRGBO(26, 26, 26, 1),
+                                      child: Center(
+                                        child: RichText(
+                                          textAlign: TextAlign.start,
+                                          text: TextSpan(
+                                            text: element['coupon_id'] != null
+                                                ? element['code']
+                                                : '* * * * * *',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w600,
+                                              color:
+                                                  Color.fromRGBO(26, 26, 26, 1),
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                     Spacer(),
                                     Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
+                                      padding:
+                                          EdgeInsets.fromLTRB(0, 10, 10, 0),
                                       child: ElevatedButton(
                                         onPressed: () {
                                           if (element['coupon_id'] != null) {
