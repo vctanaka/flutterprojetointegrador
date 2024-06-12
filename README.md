@@ -10,10 +10,11 @@ Este projeto é uma aplicação web progressiva (PWA) desenvolvida em Flutter co
 
 ### Frontend (Flutter)
 - **Interface de usuário responsiva**: Desenvolvida em Flutter, a interface é amigável e adaptável a diferentes dispositivos, incluindo desktops, tablets e smartphones.
-- **Diagnóstico de pele**: Ferramenta que permite aos usuários preencher questionários e enviar fotos para receber um diagnóstico inicial.
+- **Diagnóstico de pele**: Ferramenta que permite aos usuários preencher questionários para receber um diagnóstico inicial.
 - **Recomendações personalizadas**: Baseado no diagnóstico, os usuários recebem recomendações personalizadas de tratamentos e produtos.
 - **Acompanhamento de progresso**: Os usuários podem registrar e acompanhar o progresso do seu tratamento de pele ao longo do tempo.
 - **Notificações push**: Notificações para lembrar os usuários de suas atividades e tratamentos.
+- **Gamificado**: Ao realizar tarefas diarias o usuários ganham pontos que podem ser trocados por cupons de desconto.
 
 ### Backend (Laravel) - https://github.com/vctanaka/appProjetoIntegrador
 - **Autenticação e autorização**: Gerenciamento seguro de usuários com autenticação JWT.
