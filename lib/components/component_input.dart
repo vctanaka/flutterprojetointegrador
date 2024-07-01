@@ -17,19 +17,28 @@ class ComponentInput extends StatelessWidget {
           borderRadius:
               BorderRadius.circular(10.0), // Set the border radius here
         ),
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderSide: BorderSide.none, // Remove the border
-            ),
-            labelText: labelText,
-            labelStyle: TextStyle(
+        child: Center(
+          child: TextField(
+            controller: controller,
+            style: TextStyle(
               color: Color.fromRGBO(255, 255, 255, 1),
-              fontSize: 13,
-              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              fontWeight: FontWeight.normal,
+              fontFamily: 'Roboto',
             ),
-            floatingLabelBehavior: FloatingLabelBehavior.never,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none, // Remove the border
+              ),
+              labelText: labelText,
+              labelStyle: TextStyle(
+                color: Color.fromRGBO(255, 255, 255, 1),
+                fontSize: 15,
+                fontWeight: FontWeight.normal,
+                fontFamily: 'Roboto',
+              ),
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+            ),
           ),
         ),
       ),

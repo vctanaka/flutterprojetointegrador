@@ -37,11 +37,11 @@ class _LoginState extends State<Login> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset('lib/img/splash.png', height: 300, width: 450),
-              SizedBox(height: 20),
+              Image.asset('lib/img/logo2.png', height: 350, width: 5000),
+              SizedBox(height: 10),
               Container(
                 width: 300,
-                height: 430,
+                height: 360,
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(255, 245, 250, 1),
                   borderRadius: BorderRadius.circular(20),
@@ -49,7 +49,6 @@ class _LoginState extends State<Login> {
                 child: ListView(
                   padding: EdgeInsets.all(25),
                   children: [
-                    SizedBox(height: 40),
                     ComponentInput(
                         labelText: 'Usuario', controller: emailController),
                     SizedBox(height: 10),
@@ -90,7 +89,7 @@ class _LoginState extends State<Login> {
                         });
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromRGBO(219, 88, 143, 1),
+                        backgroundColor: Color.fromRGBO(242, 144, 187, 1),
                         minimumSize: Size(70, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),

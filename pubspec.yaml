@@ -66,6 +66,9 @@ flutter:
     - lib/img/splash.png
     - lib/img/body.png
     - lib/img/face.png
+    - lib/img/body2.jpg
+    - lib/img/logo2.png
+    - web/icons/logo2.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
